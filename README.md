@@ -1,0 +1,1 @@
+# ab2017-ozgur-yazilimlarla-ag-guvenligi
