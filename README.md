@@ -1,1 +1,1 @@
-# AB2017 Özgur Yazılımlarla Ağ Güvenliği Eğitim Notları
+# AB2017 Özgür Yazılımlarla Ağ Güvenliği Eğitimi Notları
