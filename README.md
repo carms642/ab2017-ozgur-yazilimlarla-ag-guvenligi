@@ -1,1 +1,1 @@
-# ab2017-ozgur-yazilimlarla-ag-guvenligi
+# AB2017 Özgur Yazılımlarla Ağ Güvenliği Eğitim Notları
