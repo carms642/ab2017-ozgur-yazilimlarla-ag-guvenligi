@@ -4,13 +4,28 @@ Merhabalar, dokümanda Ossec Manager, Elasticsearch, Logstash ve Kibana kuruluml
 
 Dokümanda işletim sistemi olarak [***Ubuntu Server 16.04.1 LTS***](https://www.ubuntu.com/download/server/thank-you?version=16.04.1&architecture=amd64) sürümünü kullanılmıştır.
 
+* Git ve Build Essential paketlerin yüklenmesi
 ```
-sinan@ossec-manager:~$ sudo su
-root@ossec-manager:/home/sinan# cd
-root@ossec-manager:~# apt-get install git build-essential
-root@ossec-manager:~# git clone https://github.com/ossec/ossec-hids -b stable
-root@ossec-manager:~# cd ossec-hids/
-root@ossec-manager:~/ossec-hids# bash install.sh 
+sudo apt-get -y install git build-essential
+```
+_Paketler yüklendikten sonra aktif olan oturumunuzu kapatıp yeniden oturum açınız._
+
+* Ossec uygulamasının Github'dan stable versiyonunu çekmek
+
+Aşağıdaki işlemleri root kullanıcısı ile yapınız. root kullanıcısına geçmek için: ```sudo su``` komutunu kullanabilirsiniz.
+
+```
+# git clone https://github.com/ossec/ossec-hids -b stable
+```
+* Ossec kurulumu için sh dosyasını çalıştırma
+
+```
+# cd ossec-hids/
+~/ossec-hids# bash install.sh 
+```
+* Sh dosyasını çalıştırdığınızda aşağıdaki gibi bir yazı içinde sistem bilgileriniz, kullanıcınız ve makinenin hostname'i yazacaktır. Devam etmek için ENTER tuşuna basınız.
+
+```
  OSSEC HIDS v2.8 Installation Script - http://www.ossec.net
  
  You are about to start the installation process of the OSSEC HIDS.
@@ -22,7 +37,9 @@ root@ossec-manager:~/ossec-hids# bash install.sh
 
 
   -- Press ENTER to continue or Ctrl-C to abort. --
-
+```
+* Bu dokümanda kuracağımız ossec bizim için manager uygulama olacağı için kurulum türü olarak _server_ yazıyoruz. 
+```
 1- What kind of installation do you want (server, agent, local, hybrid or help)? server
 
 
