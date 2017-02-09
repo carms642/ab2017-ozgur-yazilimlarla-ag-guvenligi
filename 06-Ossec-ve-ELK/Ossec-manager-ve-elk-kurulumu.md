@@ -23,7 +23,8 @@ Aşağıdaki işlemleri root kullanıcısı ile yapınız. root kullanıcısına
 # cd ossec-hids/
 ~/ossec-hids# bash install.sh 
 ```
-* Sh dosyasını çalıştırdığınızda aşağıdaki gibi bir yazı içinde sistem bilgileriniz, kullanıcınız ve makinenin hostname'i yazacaktır. Devam etmek için ENTER tuşuna basınız.
+* Sh dosyasını çalıştırdığınızda hangi dilde kurulum yapmak istediğinizi soracaktır. ENTER tuşuna basarak varsayılan dil İngilizce ile devam ediyoruz.
+* Bir sonraki adımda aşağıdaki gibi bir yazı içinde sistem bilgileriniz, kullanıcınız ve makinenin hostname'i yazacaktır. Devam etmek için ENTER tuşuna basınız.
 
 ```
  OSSEC HIDS v2.8 Installation Script - http://www.ossec.net
@@ -41,9 +42,20 @@ Aşağıdaki işlemleri root kullanıcısı ile yapınız. root kullanıcısına
 * Bu dokümanda kuracağımız ossec bizim için manager uygulama olacağı için kurulum türü olarak _server_ yazıyoruz. 
 ```
 1- What kind of installation do you want (server, agent, local, hybrid or help)? server
+```
+
+* Bu adımda kurulum yapılacağı yeri sormaktadır. ENTER tuşuna basarak varsayılan konumu seçiyoruz.
+
+```
+2- Setting up the installation environment.
+
+ - Choose where to install the OSSEC HIDS [/var/ossec]: 
+
+```
+* 
 
 
-
+```
 root@ossec-manager:~/ossec-hids# nano /var/ossec/etc/ossec.conf 
 
     <jsonout_output>yes</jsonout_output>
