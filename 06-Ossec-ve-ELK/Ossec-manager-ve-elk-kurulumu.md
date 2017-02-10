@@ -4,9 +4,11 @@ Merhabalar, dokümanda Ossec Manager, Elasticsearch, Logstash ve Kibana kuruluml
 
 Dokümanda işletim sistemi olarak [***Ubuntu Server 16.04.1 LTS***](https://www.ubuntu.com/download/server/thank-you?version=16.04.1&architecture=amd64) sürümünü kullanılmıştır.
 
+_Aşağıdaki tüm kurulum adımları root kullanıcısı ile yapılacaktır. root kullanıcısına geçmek için ```sudo su``` komutunu kullanabilirsiniz._
+
 * Git ve Build Essential paketlerin yüklenmesi
 ```
-sudo apt-get -y install git build-essential
+# apt-get -y install git build-essential
 ```
 _Paketler yüklendikten sonra aktif olan oturumunuzu kapatıp yeniden oturum açınız._
 
