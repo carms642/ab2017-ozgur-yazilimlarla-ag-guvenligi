@@ -141,34 +141,54 @@ Ossec manager kurulumunu tamamladık. ELK uygulamalarını kurabilmemiz için ö
 
 ## Elasticsearch kurulumu
 ```
-
-wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
-echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-5.x.list
-sudo apt-get update
-sudo apt-get install elasticsearch
-sudo /bin/systemctl daemon-reload
-sudo /bin/systemctl enable elasticsearch.service
-sudo service elasticsearch start
+# wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+# echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-5.x.list
+# apt-get update
+# apt-get install elasticsearch
+# /bin/systemctl daemon-reload
+# /bin/systemctl enable elasticsearch.service
+# service elasticsearch start
 ```
 
 ## Logstash Kurulumu
 
+* Logstash'i tar.gz dosyasını indirip kuracağız. Bunun için aşağıdaki adımları uygulayınız.
 ```
-root@ossec-manager:~$ wget https://artifacts.elastic.co/downloads/logstash/logstash-5.2.0.tar.gz
-root@ossec-manager:~$ tar -xzf logstash-5.2.0.tar.gz 
-root@ossec-manager:~$ cd logstash-5.2.0/
-root@ossec-manager:~/logstash-5.2.0$ nano siem.conf
-root@ossec-manager:~/logstash-5.2.0# bin/logstash -f siem.conf
+# wget https://artifacts.elastic.co/downloads/logstash/logstash-5.2.0.tar.gz
+# tar -xzf logstash-5.2.0.tar.gz 
+# cd logstash-5.2.0/
 ```
+* Logstash ile ossec'den verileri alıp Elasticsearch'e yazmak ve bazı alanların isimlerini güncellemek için herhangi bir editör ile siem.conf adında bir dosya oluşturuyoruz.
+```
+~/logstash-5.2.0# nano siem.conf
+```
+Dosya içeriği olarak [siem.conf](siem.conf.sample) örneğindeki configler ile doldurunuz.
 
-
+* Logstash'i siem.conf ile birlikte çalıştırmak için aşağıdaki komutu çalıştırınız.
+```
+~/logstash-5.2.0# bin/logstash -f siem.conf
+```
+* Logstash kurulumunu tamamladık. Eğer bu zamana herşey yolunda gitmişse Ossec alert üretmeye başlamış ve Logstash'te bu verileri Elasticsearch'e yazmaktadır.
 
 ## Kibana Kurulumu
 
+* Kibana kurulumunu .deb paketi ile yapacağız. Bunun için aşağıdaki adımları uygulayınız.
 ```
-wget https://artifacts.elastic.co/downloads/kibana/kibana-5.2.0-amd64.deb
-sinan@ossec-manager:~$ sudo dpkg -i kibana-5.2.0-amd64.deb 
-nano /etc/kibana/kibana.yml
+# wget https://artifacts.elastic.co/downloads/kibana/kibana-5.2.0-amd64.deb
+# dpkg -i kibana-5.2.0-amd64.deb 
+```
+* Kibana arayüzüne erişebilmemiz için kibana.yml'de server.host değerini makinemizin IP adresi ile güncellemeliyiz.
+
+```
+# nano /etc/kibana/kibana.yml
 
 
+......
+# Specifies the address to which the Kibana server will bind. IP addresses and host names are both valid values.
+# The default is 'localhost', which usually means remote machines will not be able to connect.
+# To allow connections from remote users, set this parameter to a non-loopback address.
+server.host: "192.168.82.70"
+......
+
 ```
+Kurulumları tamamladık. Tarayıcıdan http://ossec-makinesini-ip-adresi:5601 adresine gittiğimizde Configure an index pattern sayfası karşılayacaktır. Index name or pattern alanına ```ossec-*``` değerini yazdıp kaydettiğimizde sistemimiz kullanıma hazır hale gelecektir.
